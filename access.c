@@ -20,12 +20,10 @@ int main(int ac, char **argv, char **env)
 	pid_t process;
 
 	do {
+		checks = getinput();
 
-		checks = getinput(/*&buffy, &size, stdin*/);
-
-        /*input stands for command entered
-          if input is found, execute*/
 	printf("before access\n");
+
         if ((access(checks[0], X_OK) == 0))
         {
 		forks = forkitfunction(checks);
@@ -34,6 +32,7 @@ int main(int ac, char **argv, char **env)
         {
 		paths = pathfork(checks, env);
 	}
+
 	free(checks[0]);
 	free(checks);
 
