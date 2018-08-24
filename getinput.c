@@ -9,7 +9,7 @@
 char **getinput(void)
 {
         char **array, *buffer;
-        int check;
+        int count, check = 0;
         size_t size = 0;
 
 	if (isatty(0) == 1)
@@ -18,13 +18,28 @@ char **getinput(void)
         check = getline(&buffer, &size, stdin);
 	if (check == -1 || buffer == NULL || buffer[0] == 0)
         {
-                free(buffer);
+                if (isatty(0) == 1)
+			write(2, "\n", 1);
+		free(buffer);
 		exit(98);
         }
 
+	count = 0;
+	while (buffer[count] != '\0')
+		count++;
+
+	if (buffer[count - 1] != '\n')
+	{
+		free(buffer);
+		exit(98);
+	}
+
 	check = stringprep(buffer, ' ', '\n');
 
-	array = buildarray(buffer, ' ', check);
+	if (check != 0)
+		array = buildarray(buffer, ' ', check);
+	else
+		array = NULL;
 
         return (array);
 }
