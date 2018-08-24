@@ -14,28 +14,30 @@
  */
 int main(int ac, char **argv, char **env)
 {
-        char *append, **pt;
         char **checks;
-        int status, count = 0, forks, paths;
+        int status, loop = 0, forks, paths;
 	pid_t process;
 
 	do {
+
 		checks = getinput();
 
-	printf("before access\n");
+		if (checks != NULL)
+		{
 
-        if ((access(checks[0], X_OK) == 0))
-        {
-		forks = forkitfunction(checks);
-        }
-        else
-        {
-		paths = pathfork(argv[0], checks, env);
-	}
-        free(checks[0]);
-	free(checks);
+        		if ((access(checks[0], X_OK) == 0))
+        		{
+				forks = forkitfunction(checks);
+        		}
+        		else
+        		{
+				paths = pathfork(argv[0], checks, env);
+			}
+        		free(checks[0]);
+			free(checks);
+		}
 
-	} while (checks != NULL);
+	} while (loop == 0);
         return (0);
 }
 
