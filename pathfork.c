@@ -43,13 +43,20 @@ int pathfork(char *argv, char **checks, char **env)
 				break;
 			}
 		}
-	        free(append);
-		append = NULL;
+		if (path[count + 1] != NULL)
+		{
+			free(append);
+			append = NULL;
+		}
 		count++;
 	}
-	if (access(append, X_OK) == -1)
-		_error(argv, checks[0], "1");
-	count = 0;
+	if(path[count] == NULL)
+		if (access(append, X_OK) == -1)
+		{
+			_error(argv, checks[0], "1");
+			free(append);
+		}
+        count = 0;
         free(path[0]);
         free(path);
 	return(0);
