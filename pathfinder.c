@@ -13,21 +13,26 @@
 char **pathfinder(char **env)
 {
         int count, count2;
-        char *string, **array, path[] = {'P', 'A', 'T', 'H', '='};
-	
+        char *string, **array, *compare, path[] = {'P', 'A', 'T', 'H', '='};
+
 	printf("im about to enter a loop\n");
-    
+
+	count = 0;
+	count2 = 0;
 
         while(env[count] != NULL)
         {
-                while(env[count][count2] == path[count2])
+		printf("in loop\n");
+		compare = env[count];
+                while(*compare++ == path[count2])
                 {
                         count2++;
                 }
                 if (count2 == 5)
                 {
 
-			string = env[count] + 5;
+			printf("hit\n");
+			string = compare;
                         printf("%s\n", string);
                         break;
                 }
@@ -37,7 +42,7 @@ char **pathfinder(char **env)
         }
 
 	string = _strdup(string);
-	
+
 	count  = stringprep(string, ':', '\0');
 
 	array = buildarray(string, ':', count);

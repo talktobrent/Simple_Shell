@@ -32,44 +32,6 @@ int main(int ac, char **argv, char **env)
         }
         else
         {
-                /*pt equals array of paths 
-                pt = path(env);
-                /* loop through array of path
-                while(pt[count])
-                {
-                        /*if path exists then execute(pathname, token, null)
-
-                         append = _strcat(pt[count], checks[0]);
-			printf("append %s\n", append);
-                        if (access(append, X_OK) == 0)
-                        {
-                                process = fork();
-
-				if (process == 0)
-				{
-
-					if (execve(append, checks, env) == -1)
-						perror("Error");
-					else
-						return(0);
-				}
-				else
-				{
-					wait(&status);
-					printf("winner: %s\n", append);
-					free(append);
-					append = NULL;
-					break;
-				}
-		        }
-			free(append);
-			append = NULL;
-                        count++;
-                }
-		count = 0;
-        free(pt[0]);
-	free(pt);*/
-
 		paths = pathfork(checks, env);
 	}
 	free(checks[0]);

@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 
 int pathfork(char **checks, char **env)
 {
-	char **path, *append, *pt = "PATH";
+	char **path, *append;
         int count = 0, status;
 	pid_t process;
 
@@ -48,4 +50,5 @@ int pathfork(char **checks, char **env)
 	count = 0;
         free(path[0]);
         free(path);
+	return(0);
 }
