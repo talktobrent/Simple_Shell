@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 
 
-int pathfork(char **checks, char **env)
+int pathfork(char *argv, char **checks, char **env)
 {
 	char **path, *append;
         int count = 0, status;
@@ -43,10 +43,12 @@ int pathfork(char **checks, char **env)
 				break;
 			}
 		}
-		free(append);
+	        free(append);
 		append = NULL;
 		count++;
 	}
+	if (access(append, X_OK) == -1)
+		_error(argv, checks[0], "1");
 	count = 0;
         free(path[0]);
         free(path);

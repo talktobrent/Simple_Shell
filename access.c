@@ -30,14 +30,12 @@ int main(int ac, char **argv, char **env)
         }
         else
         {
-		paths = pathfork(checks, env);
+		paths = pathfork(argv[0], checks, env);
 	}
-
-	free(checks[0]);
+        free(checks[0]);
 	free(checks);
 
 	} while (checks != NULL);
-
         return (0);
 }
 

@@ -4,11 +4,12 @@
 char *_strcat(char *dest, char *src);
 char *_strdup(char *str);
 int forkitfunction(char **checks);
-int pathfork(char **checks, char **env);
+int pathfork(char *argv, char **checks, char **env);
 char **buildarray(char *string, char delimeter, int elements);
 int stringprep(char *string, char delimeter, char end);
 char **pathfinder(char **env);
 char **getinput(void);
+void _error(char *argv, char *checks, char *message);
 
 #endif /* _SHELL_H_ */
 
