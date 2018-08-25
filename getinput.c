@@ -30,6 +30,7 @@ char **getinput(void)
 
 	if (buffer[count - 1] != '\n')
 	{
+		write(2, "\n", 1);
 		free(buffer);
 		exit(98);
 	}
@@ -39,7 +40,10 @@ char **getinput(void)
 	if (check != 0)
 		array = buildarray(buffer, ' ', check);
 	else
+	{
 		array = NULL;
+		free(buffer);
+	}
 
         return (array);
 }
