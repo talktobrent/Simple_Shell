@@ -6,21 +6,19 @@
 #include <sys/wait.h>
 
 
-int pathfork(char *argv, char **checks, char **env)
+int pathfork(char *argv, char **checks, char **patharray)
 {
-	char **path, *append;
+	char *append;
         int count = 0, status;
 	pid_t process;
 
-	path = pathfinder(env);
-
 	printf("i printed the path");
 
-	while(path[count])
+	while(patharray[count])
 	{
 		/*if path exists then execute(pathname, token, null)*/
 
-		append = _strcat(path[count], checks[0]);
+		append = _strcat(patharray[count], checks[0]);
 		printf("append %s\n", append);
 		if (access(append, X_OK) == 0)
 		{
@@ -29,7 +27,7 @@ int pathfork(char *argv, char **checks, char **env)
 			if (process == 0)
 			{
 
-				if (execve(append, checks, env) == -1)
+				if (execve(append, checks, patharray) == -1)
 					perror("Error");
 				else
 					return(0);
@@ -39,27 +37,22 @@ int pathfork(char *argv, char **checks, char **env)
 				wait(&status);
 				printf("winner: %s\n", append);
 				free(append);
-				append = NULL;
 				break;
 			}
 		}
-		if (path[count + 1] != NULL)
-		{
-			free(append);
-			append = NULL;
-		}
+		free(append);
+		append = NULL;
 		count++;
 	}
-	if(path[count] == NULL)
+
+	if(patharray[count] == NULL)
 	{
 		_error(argv, checks[0], "1");
 		printf("before fail free\n");
-		free(append);
 	}
-        count = 0;
 
 	printf("before path0\n");
 	printf("before patharry\n");
-        free(path);
+        free(patharray);
 	return(0);
 }

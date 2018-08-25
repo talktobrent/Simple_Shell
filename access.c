@@ -14,27 +14,39 @@
  */
 int main(int ac, char **argv, char **env)
 {
-        char **checks;
-        int status, loop = 0, forks, paths;
-	pid_t process;
+        char **checks, *path, *commands, **patharray;
+        int status, size, loop = 0;
 
 	do {
 
-		checks = getinput(argv[0]);
+		commands = getinput(argv[0]);
+		size = stringprep(commands, ' ', '\n');
+
+		if (size != 0)
+			checks = buildarray(commands, ' ', size);
+		else
+		{
+			checks = NULL;
+			free(commands);
+		}
 
 		if (checks != NULL)
 		{
 
         		if ((access(checks[0], X_OK) == 0))
         		{
-				forks = forkitfunction(checks);
+				forkitfunction(checks);
         		}
         		else
         		{
-				paths = pathfork(argv[0], checks, env);
+				path = pathfinder(env);
+				size = stringprep(path, ':', '\0');
+				patharray = buildarray(path, ':', size);
+				pathfork(argv[0], checks, patharray);
 			}
         		printf("before free chk0\n");
-			free(freebuffer);
+			free(commands);
+			free(path);
         		printf("before free chkarray\n");
 			free(checks);
 		}
@@ -42,6 +54,7 @@ int main(int ac, char **argv, char **env)
 		checks = NULL;
 
 	} while (loop == 0);
+
         return (0);
 }
 

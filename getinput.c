@@ -6,7 +6,7 @@
 #define BUFFY 1024
 
 
-char **getinput(char *argv)
+char *getinput(char *argv)
 {
         char **array, *buffer;
         int count, check = 0;
@@ -38,17 +38,5 @@ char **getinput(char *argv)
 		exit(98);
 	}
 
-	check = stringprep(buffer, ' ', '\n');
-
-	if (check != 0)
-		array = buildarray(buffer, ' ', check);
-	else
-	{
-		array = NULL;
-		free(buffer);
-	}
-
-	freebuffer = buffer;
-
-        return (array);
+        return (buffer);
 }
