@@ -12,6 +12,8 @@ char **getinput(char *argv)
         int count, check = 0;
         size_t size = 0;
 
+	freebuffer = NULL;
+
 	if (isatty(0) == 1)
 		write(2, "$ ", 2);
 
@@ -45,6 +47,8 @@ char **getinput(char *argv)
 		array = NULL;
 		free(buffer);
 	}
+
+	freebuffer = buffer;
 
         return (array);
 }

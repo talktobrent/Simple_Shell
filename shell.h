@@ -10,6 +10,7 @@ int stringprep(char *string, char delimeter, char end);
 char **pathfinder(char **env);
 char **getinput(char *argv);
 void _error(char *argv, char *checks, char *message);
+char *freebuffer;
 
 #endif /* _SHELL_H_ */
 

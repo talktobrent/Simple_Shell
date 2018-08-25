@@ -22,7 +22,6 @@ char **pathfinder(char **env)
 
         while(env[count] != NULL)
         {
-		printf("in loop\n");
 		compare = env[count];
                 while(*compare++ == path[count2])
                 {

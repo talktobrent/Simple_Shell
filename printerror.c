@@ -1,5 +1,6 @@
 #include "shell.h"
 #include <stdio.h>
+#include <unistd.h>
 
 void _error(char *argv, char *checks, char *message)
 {

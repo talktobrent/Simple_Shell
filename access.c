@@ -33,9 +33,13 @@ int main(int ac, char **argv, char **env)
         		{
 				paths = pathfork(argv[0], checks, env);
 			}
-        		free(checks[0]);
+        		printf("before free chk0\n");
+			free(freebuffer);
+        		printf("before free chkarray\n");
 			free(checks);
 		}
+
+		checks = NULL;
 
 	} while (loop == 0);
         return (0);

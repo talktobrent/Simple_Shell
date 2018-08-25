@@ -51,13 +51,15 @@ int pathfork(char *argv, char **checks, char **env)
 		count++;
 	}
 	if(path[count] == NULL)
-		if (access(append, X_OK) == -1)
-		{
-			_error(argv, checks[0], "1");
-			free(append);
-		}
+	{
+		_error(argv, checks[0], "1");
+		printf("before fail free\n");
+		free(append);
+	}
         count = 0;
-        free(path[0]);
+
+	printf("before path0\n");
+	printf("before patharry\n");
         free(path);
 	return(0);
 }
