@@ -20,9 +20,16 @@ int stringprep(char *string, char delimeter, char end)
         printf("test\n");
 
         /* isolates arguments and finds element count */
+
+	if (string[0] == '\t')
+		string[0] = ' ';
+
         while (string[count] != end && string[count] != '\0')
         {
-                if (string[count] != delimeter)
+                if (string[count + 1] == '\t')
+			string[count + 1] = ' ';
+
+		if (string[count] != delimeter)
                 {
 
                         if (string[count + 1] == delimeter)
@@ -35,7 +42,6 @@ int stringprep(char *string, char delimeter, char end)
 				elements++;
 
                 }
-       //         printf("count = %lu and buffer is %c\n", count, string[count]);
                 count++;
         }
 
