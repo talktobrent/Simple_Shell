@@ -20,7 +20,7 @@ int main(int ac, char **argv, char **env)
 
 	do {
 
-		checks = getinput();
+		checks = getinput(argv[0]);
 
 		if (checks != NULL)
 		{
