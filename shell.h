@@ -8,7 +8,7 @@ int pathfork(char *argv, char **checks, char **env);
 char **buildarray(char *string, char delimeter, int elements);
 int stringprep(char *string, char delimeter, char end);
 char **pathfinder(char **env);
-char **getinput(void);
+char **getinput(char *argv);
 void _error(char *argv, char *checks, char *message);
 
 #endif /* _SHELL_H_ */
