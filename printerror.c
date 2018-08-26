@@ -4,6 +4,7 @@
 
 void _error(char *argv, int loop, char *checks, char *string)
 {
+	char *code;
 	int len = 0, len1 = 0, len2 = 0, len3 = 0;
 
 	while (checks[len])
@@ -12,6 +13,7 @@ void _error(char *argv, int loop, char *checks, char *string)
 	while (argv[len1] != '\0')
                 len1++;
 
+	code = intostring(loop);
 	while(code[len2])
 		len2++;
 

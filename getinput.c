@@ -6,7 +6,7 @@
 #define BUFFY 1024
 
 
-char *getinput(char *argv, int failchk)
+char *getinput(char *argv, int failchk, int loop)
 {
         char **array, *buffer;
         int count, check = 0;
@@ -30,7 +30,7 @@ char *getinput(char *argv, int failchk)
 
 	if (buffer[count - 1] != '\n')
 	{
-		_error(argv, buffer, "1", "");
+		_error(argv, loop, "1", "");
 		write(2, "$\n", 2);
 		free(buffer);
 		exit(126);

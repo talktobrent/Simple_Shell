@@ -13,7 +13,7 @@ int main(int ac, char **argv, char **env)
 
 	do {
 
-		commands = getinput(argv[0], failchk);
+		commands = getinput(argv[0], failchk, loop);
 		size = stringprep(commands, ' ', '\n');
 
 		if (size != 0)
@@ -39,7 +39,7 @@ int main(int ac, char **argv, char **env)
 				path = pathfinder(env);
 				size = stringprep(path, ':', '\0');
 				patharray = buildarray(path, ':', size);
-				failchk = pathfork(argv[0], checks, patharray);
+				failchk = pathfork(argv[0], checks, patharray, loop);
 				free(path);
 			}
         		printf("before free commands\n");
