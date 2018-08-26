@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void _error(char *argv, char *checks, char *message)
+void _error(char *argv, int loop, char *checks, char *string)
 {
-	int len = 0, len1 = 0, len2 = 0;
+	int len = 0, len1 = 0, len2 = 0, len3 = 0;
 
 	while (checks[len])
 		len++;
@@ -12,18 +12,21 @@ void _error(char *argv, char *checks, char *message)
 	while (argv[len1] != '\0')
                 len1++;
 
-	while(message[len2])
+	while(code[len2])
 		len2++;
+
+	while(string[len3])
+		len3++;
 
 	write(1, argv, len1);
 	write(1, ": ", 2);
 
-	write(1, message, len2);
+	write(1, code, len2);
 	write(1, ": ", 2);
 
 	write(1, checks, len);
 	write(1, ": ", 2);
 
-	write(1, "not found", 9);
+	write(1, string, len3);
 	write(1, "\n", 2);
 }

@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 #include "shell.h"
-#include <sys/wait.h>
-#include <sys/types.h>
 
 /**
  *
@@ -15,11 +9,11 @@
 int main(int ac, char **argv, char **env)
 {
         char **checks, *path, *commands, **patharray;
-        int status, size, loop = 0;
+        int status, size, failchk = 0, loop = 1;
 
 	do {
 
-		commands = getinput(argv[0]);
+		commands = getinput(argv[0], failchk);
 		size = stringprep(commands, ' ', '\n');
 
 		if (size != 0)
@@ -37,23 +31,29 @@ int main(int ac, char **argv, char **env)
         		{
 				forkitfunction(checks);
         		}
+			else if ((access(checks[0], F_OK) == 0))
+				_error(argv[0], loop, checks[0], "Permission denied");
+
         		else
         		{
 				path = pathfinder(env);
 				size = stringprep(path, ':', '\0');
 				patharray = buildarray(path, ':', size);
-				pathfork(argv[0], checks, patharray);
+				failchk = pathfork(argv[0], checks, patharray);
+				free(path);
 			}
-        		printf("before free chk0\n");
+        		printf("before free commands\n");
 			free(commands);
-			free(path);
         		printf("before free chkarray\n");
 			free(checks);
 		}
 
 		checks = NULL;
+		commands = NULL;
+		path = NULL;
+		loop++;
 
-	} while (loop == 0);
+	} while (loop > 0);
 
         return (0);
 }

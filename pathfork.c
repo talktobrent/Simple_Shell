@@ -1,12 +1,6 @@
 #include "shell.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 
-
-int pathfork(char *argv, char **checks, char **patharray)
+int pathfork(char *argv, char **checks, char **patharray, int loop)
 {
 	char *append;
         int count = 0, status;
@@ -20,6 +14,7 @@ int pathfork(char *argv, char **checks, char **patharray)
 
 		append = _strcat(patharray[count], checks[0]);
 		printf("append %s\n", append);
+
 		if (access(append, X_OK) == 0)
 		{
 			process = fork();
@@ -40,6 +35,15 @@ int pathfork(char *argv, char **checks, char **patharray)
 				break;
 			}
 		}
+		if (access(append, F_OK) == 0)
+		{
+			printf("Hit me!\n");
+			_error(argv, loop, checks[0], "Permission denied");
+			free(append);
+			break;
+		}
+
+
 		free(append);
 		append = NULL;
 		count++;
@@ -47,12 +51,13 @@ int pathfork(char *argv, char **checks, char **patharray)
 
 	if(patharray[count] == NULL)
 	{
-		_error(argv, checks[0], "1");
-		printf("before fail free\n");
+		_error(argv, loop, checks[0], "not found");
+        	free(patharray);
+		return(127);
 	}
 
 	printf("before path0\n");
-	printf("before patharry\n");
         free(patharray);
+	printf("before patharry\n");
 	return(0);
 }

@@ -14,6 +14,8 @@ int forkitfunction(char **checks)
 	{
 		if (execve(checks[0], checks, NULL) == -1)
 			exit (1);
+		else
+			exit(0);
 	}
 	else
 	{

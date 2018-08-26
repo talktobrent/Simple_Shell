@@ -6,13 +6,11 @@
 #define BUFFY 1024
 
 
-char *getinput(char *argv)
+char *getinput(char *argv, int failchk)
 {
         char **array, *buffer;
         int count, check = 0;
         size_t size = 0;
-
-	freebuffer = NULL;
 
 	if (isatty(0) == 1)
 		write(2, "$ ", 2);
@@ -23,7 +21,7 @@ char *getinput(char *argv)
                 if (isatty(0) == 1)
 			write(2, "\n", 1);
 		free(buffer);
-		exit(98);
+		exit(failchk);
         }
 
 	count = 0;
@@ -32,10 +30,10 @@ char *getinput(char *argv)
 
 	if (buffer[count - 1] != '\n')
 	{
-		_error(argv, buffer, "1");
+		_error(argv, buffer, "1", "");
 		write(2, "$\n", 2);
 		free(buffer);
-		exit(98);
+		exit(126);
 	}
 
         return (buffer);
