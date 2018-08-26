@@ -34,7 +34,7 @@ int main(int ac, char **argv, char **env)
 			else if ((access(checks[0], F_OK) == 0))
 				_error(argv[0], loop, checks[0], "Permission denied");
 
-        		else
+		        else
         		{
 				path = pathfinder(env);
 				size = stringprep(path, ':', '\0');
@@ -42,6 +42,7 @@ int main(int ac, char **argv, char **env)
 				failchk = pathfork(argv[0], checks, patharray, loop);
 				free(path);
 			}
+
         		printf("before free commands\n");
 			free(commands);
         		printf("before free chkarray\n");
