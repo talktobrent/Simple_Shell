@@ -15,15 +15,20 @@ int stringprep(char *string, char delimeter, char end)
         size_t count = 0;
 	int elements = 0;
 
-	count = 0;
-
         printf("test\n");
 
-        /* isolates arguments and finds element count */
-        while (string[count] != end /*&& string[count] != '\0'*/)
+        /* isolates arguments and finds element count, and replaces
+	 * tabs with spaces*/
+
+	if (string[0] == '\t')
+		string[0] = ' ';
+
+        while (string[count] != end && string[count] != '\0')
         {
-                printf("inloop\n");
-                if (string[count] != delimeter)
+                if (string[count + 1] == '\t')
+			string[count + 1] = ' ';
+
+		if (string[count] != delimeter)
                 {
 
                         if (string[count + 1] == delimeter)
@@ -36,7 +41,6 @@ int stringprep(char *string, char delimeter, char end)
 				elements++;
 
                 }
-                printf("count = %lu and buffer is %c\n", count, string[count]);
                 count++;
         }
 

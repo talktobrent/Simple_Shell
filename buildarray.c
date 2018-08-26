@@ -17,8 +17,13 @@ char **buildarray(char *string, char delimeter, int elements)
         char **array;
 
         /* builds array for size of pointers * element count + 1 for NULL element */
-        printf("elements: %d\n", elements);
         array = malloc(sizeof(char *) * (elements + 1));
+	if (array == NULL)
+	{
+//		write(2, "Not enough space/cannot allocate memory", 39);
+//		write(2, "\n", 2);
+		return(NULL);
+	}
 
         printf("testaftermalloc\n");
 

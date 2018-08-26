@@ -1,27 +1,20 @@
 #include "shell.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 
-
-int pathfork(char **checks, char **env)
+int pathfork(char *argv, char **checks, char **patharray, int loop)
 {
-	char **path, *append;
+	char *append;
         int count = 0, status;
 	pid_t process;
 
-	path = pathfinder(env);
-
 	printf("i printed the path");
 
-	while(path[count])
+	while(patharray[count])
 	{
 		/*if path exists then execute(pathname, token, null)*/
 
-		append = _strcat(path[count], checks[0]);
+		append = _strcat(patharray[count], checks[0]);
 		printf("append %s\n", append);
+
 		if (access(append, X_OK) == 0)
 		{
 			process = fork();
@@ -29,7 +22,7 @@ int pathfork(char **checks, char **env)
 			if (process == 0)
 			{
 
-				if (execve(append, checks, env) == -1)
+				if (execve(append, checks, patharray) == -1)
 					perror("Error");
 				else
 					return(0);
@@ -39,16 +32,32 @@ int pathfork(char **checks, char **env)
 				wait(&status);
 				printf("winner: %s\n", append);
 				free(append);
-				append = NULL;
 				break;
 			}
 		}
+		if (access(append, F_OK) == 0)
+		{
+			printf("Hit me!\n");
+			_error(argv, loop, checks[0], "Permission denied");
+			free(append);
+			break;
+		}
+
+
 		free(append);
 		append = NULL;
 		count++;
 	}
-	count = 0;
-        free(path[0]);
-        free(path);
+
+	if(patharray[count] == NULL)
+	{
+		_error(argv, loop, checks[0], "not found");
+        	free(patharray);
+		return(127);
+	}
+
+	printf("before path0\n");
+        free(patharray);
+	printf("before patharry\n");
 	return(0);
 }

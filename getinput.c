@@ -6,10 +6,10 @@
 #define BUFFY 1024
 
 
-char **getinput(void)
+char *getinput(char *argv, int failchk, int loop)
 {
         char **array, *buffer;
-        int check;
+        int count, check = 0;
         size_t size = 0;
 
 	if (isatty(0) == 1)
@@ -18,13 +18,23 @@ char **getinput(void)
         check = getline(&buffer, &size, stdin);
 	if (check == -1 || buffer == NULL || buffer[0] == 0)
         {
-                free(buffer);
-		exit(98);
+                if (isatty(0) == 1)
+			write(2, "\n", 1);
+		free(buffer);
+		exit(failchk);
         }
 
-	check = stringprep(buffer, ' ', '\n');
+	count = 0;
+	while (buffer[count] != '\0')
+		count++;
 
-	array = buildarray(buffer, ' ', check);
+	if (buffer[count - 1] != '\n')
+	{
+		_error(argv, loop, "1", "");
+		write(2, "$\n", 2);
+		free(buffer);
+		exit(126);
+	}
 
-        return (array);
+        return (buffer);
 }
