@@ -31,4 +31,5 @@ void _error(char *argv, int loop, char *checks, char *string)
 
 	write(1, string, len3);
 	write(1, "\n", 2);
+	free(code);
 }

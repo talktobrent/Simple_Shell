@@ -12,17 +12,12 @@ int main(int ac, char **argv, char **env)
         int status, size, failchk = 0, loop = 1;
 
 	do {
-
+		checks = NULL;
 		commands = getinput(argv[0], failchk, loop);
 		size = stringprep(commands, ' ', '\n');
 
-		if (size != 0)
+		if (size > 0)
 			checks = buildarray(commands, ' ', size);
-		else
-		{
-			checks = NULL;
-			free(commands);
-		}
 
 		if (checks != NULL)
 		{
@@ -41,15 +36,15 @@ int main(int ac, char **argv, char **env)
 				patharray = buildarray(path, ':', size);
 				failchk = pathfork(argv[0], checks, patharray, loop);
 				free(path);
+				free(patharray);
 			}
 
         		printf("before free commands\n");
-			free(commands);
+			//free(commands);
         		printf("before free chkarray\n");
 			free(checks);
 		}
-
-		checks = NULL;
+		free(commands);
 		commands = NULL;
 		path = NULL;
 		loop++;
