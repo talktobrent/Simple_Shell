@@ -1,0 +1,17 @@
+#include <stdlib.h>
+#include <errno.h>
+#include <stdio.h>
+
+int main(void)
+
+{
+	char *pointer;
+
+	pointer = malloc(sizeof(long int) * 99999999999999999);
+	if (pointer == NULL)
+	{
+		perror("myfile");
+		exit(0);
+	}
+	return(0);
+}

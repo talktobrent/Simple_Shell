@@ -1,19 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 #include "shell.h"
-#define BUFFY 1024
 
-
-char *getinput(char *argv, int failchk, int loop)
+char *getinput(struct wrap *all)
 {
-        char **array, *buffer;
+        char *buffer;
         int count, check = 0;
         size_t size = 0;
 
 	if (isatty(0) == 1)
 		write(2, "$ ", 2);
+
+	if (all->off == 1)
+	{
+		write(2, "\n", 1);
+		exit(all->retval);
+	}
+
 
         check = getline(&buffer, &size, stdin);
 	if (check == -1 || buffer == NULL || buffer[0] == 0)
@@ -21,7 +22,7 @@ char *getinput(char *argv, int failchk, int loop)
                 if (isatty(0) == 1)
 			write(2, "\n", 1);
 		free(buffer);
-		exit(failchk);
+		exit(all->retval);
         }
 
 	count = 0;
@@ -30,10 +31,12 @@ char *getinput(char *argv, int failchk, int loop)
 
 	if (buffer[count - 1] != '\n')
 	{
-		_error(argv, loop, "1", "");
-		write(2, "$\n", 2);
-		free(buffer);
-		exit(126);
+		buffer[count] = '\n';
+		all->off = 1;
+		//_error(all, "");
+		//write(2, "$\n", 2);
+		//free(buffer);
+		//all->loop = 0);
 	}
 
         return (buffer);

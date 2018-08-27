@@ -10,7 +10,7 @@
  * Return: pointer to PATH string just AFTER "PATH="
  */
 
-char *pathfinder(char **env)
+char *pathfinder(struct wrap *all)
 {
         int count, count2;
         char *string, **array, *compare, path[] = {'P', 'A', 'T', 'H', '='};
@@ -20,9 +20,11 @@ char *pathfinder(char **env)
 	count = 0;
 	count2 = 0;
 
-        while(env[count] != NULL)
+	array = all->env;
+
+        while(array[count] != NULL)
         {
-		compare = env[count];
+		compare = array[count];
                 while(*compare++ == path[count2])
                 {
                         count2++;
@@ -31,7 +33,7 @@ char *pathfinder(char **env)
                 {
 
 			printf("hit\n");
-			string = compare;
+			string = compare - 1;
                         printf("%s\n", string);
                         break;
                 }

@@ -8,53 +8,63 @@
  */
 int main(int ac, char **argv, char **env)
 {
-        char **checks, *path, *commands, **patharray;
-        int status, size, failchk = 0, loop = 1;
+        int status, size;
+
+	struct wrap all;
+
+		all.loop = 1;
+		all.retval = 0;
+		all.argvzero = argv[0];
+		all.env = env;
+		all.off = 0;
 
 	do {
+		all.line = NULL;
+		all.cmdarray = NULL;
+		all.path = NULL;
+		all.patharray = NULL;
 
-		commands = getinput(argv[0], failchk, loop);
-		size = stringprep(commands, ' ', '\n');
+		all.line = getinput(&all);
+		all.retval = 0;
+		size = stringprep(all.line, ' ', '\n');
 
-		if (size != 0)
-			checks = buildarray(commands, ' ', size);
-		else
+		if (size > 0)
+			all.cmdarray = buildarray(all.line, ' ', size);
+
+		if (all.cmdarray != NULL)
 		{
-			checks = NULL;
-			free(commands);
-		}
 
-		if (checks != NULL)
-		{
-
-        		if ((access(checks[0], X_OK) == 0))
+        		if ((access(all.cmdarray[0], X_OK) == 0))
         		{
-				forkitfunction(checks);
+				forkitfunction(&all);
         		}
-			else if ((access(checks[0], F_OK) == 0))
-				_error(argv[0], loop, checks[0], "Permission denied");
+			else if ((access(all.cmdarray[0], F_OK) == 0))
+			{
+				_error(&all, "Permission denied");
+				all.retval = 126;
+			}
 
 		        else
         		{
-				path = pathfinder(env);
-				size = stringprep(path, ':', '\0');
-				patharray = buildarray(path, ':', size);
-				failchk = pathfork(argv[0], checks, patharray, loop);
-				free(path);
+				all.path = pathfinder(&all);
+				size = stringprep(all.path, ':', '\0');
+				all.patharray = buildarray(all.path, ':', size);
+				all.retval = pathfork(&all);
+				printf("before free allpath\n");
+				free(all.path);
+				printf("before free allarray\n");
+				free(all.patharray);
 			}
 
         		printf("before free commands\n");
-			free(commands);
+			//free(commands);
         		printf("before free chkarray\n");
-			free(checks);
+			free(all.cmdarray);
 		}
+		free(all.line);
+		all.loop++;
 
-		checks = NULL;
-		commands = NULL;
-		path = NULL;
-		loop++;
-
-	} while (loop > 0);
+	} while (all.loop > 0);
 
         return (0);
 }
