@@ -22,10 +22,10 @@ struct wrap {
 	int off;
 };
 
-struct funcs {
+typedef struct funcs {
 	char *cmd;
 	int (*call)(struct wrap *all);
-};
+} built_in;
 
 
 
@@ -40,7 +40,9 @@ char *getinput(struct wrap *all);
 void _error(struct wrap *all, char *string);
 char *intostring(int n);
 
-	
+int builtins(const char *input, built_in *build, struct wrap *all);
+int myenv (struct wrap *all);
+int myexit (struct wrap *all);	
 
 #endif /* _SHELL_H_ */
 

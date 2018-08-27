@@ -1,37 +1,38 @@
+#include "shell.h"
 
 
-
-int builtins(struct wrap *all)
+int builtins(const char *input, built_in *build, struct wrap *all)
 {
-	struct func builtins [] {
-		{"exit", myexit},
-		{"env", myenv},
-		{NULL, NULL}
-		};
+	int count = 0, cmp = 0;
 
-	int count, cmp;
-
-	while (builtins[count].cmd != NULL)
+	while (build[count].cmd != NULL)
 	{
-		while(builtins[count].cmd[cmp] == all->cmd[cmp])
+		printf("im in the built loop\n");
+		while(build[count].cmd[cmp] == all->cmdarray[0][cmp])
 		{
-		 	if (all->cmd[cmp] == '\0')
-				if (builtins[count].cmd[cmd] == '\0')
-					builtins[count].call(all);
+		 	if (all->cmdarray[0][cmp] == '\0')
+				if (build[count].cmd[cmp] == '\0')
+				{
+					build[count].call(all);
+					return (0);
+				}
 			cmp++;
 		}
-		count++;
+	        count++;
 	}
+	if (build[count].cmd ==NULL)
+		return (1);
 
 
 }
 
-void myenv (struct wrap *all)
+int myenv (struct wrap *all)
 {
-	int count, length;
+	int count = 0, length = 0;
 
 	while(all->env[count] != NULL)
 	{
+		printf("inloop\n");
 		while(all->env[count][length] != '\0')
 			length++;
 
@@ -39,11 +40,19 @@ void myenv (struct wrap *all)
 		length = 0;
 		count++;
 	}
+	write(1, "\n", 2);
+
+	return (count);
 }
 
-void myexit (struct wrap *all)
+int myexit (struct wrap *all)
 {
+	printf("about to exit\n");
+	free(all->line);
+	free(all->cmdarray);
+	exit(all->retval);
 
-
+	return (0);
+}
 
 
