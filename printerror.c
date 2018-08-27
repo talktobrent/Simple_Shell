@@ -1,32 +1,30 @@
 #include "shell.h"
-#include <stdio.h>
-#include <unistd.h>
 
-void _error(char *argv, int loop, char *checks, char *string)
+void _error(struct wrap *all, char *string)
 {
 	char *code;
 	int len = 0, len1 = 0, len2 = 0, len3 = 0;
 
-	while (checks[len])
+	while (all->cmdarray[0][len])
 		len++;
 
-	while (argv[len1] != '\0')
+	while (all->argvzero[len1] != '\0')
                 len1++;
 
-	code = intostring(loop);
+	code = intostring(all->loop);
 	while(code[len2])
 		len2++;
 
 	while(string[len3])
 		len3++;
 
-	write(1, argv, len1);
+	write(1, all->argvzero, len1);
 	write(1, ": ", 2);
 
 	write(1, code, len2);
 	write(1, ": ", 2);
 
-	write(1, checks, len);
+	write(1, all->cmdarray[0], len);
 	write(1, ": ", 2);
 
 	write(1, string, len3);
