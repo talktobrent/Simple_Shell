@@ -1,9 +1,6 @@
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "shell.h"
 
-int forkitfunction(char **checks)
+int forkitfunction(struct wrap *all)
 {
 	pid_t process = fork();
 
@@ -12,7 +9,7 @@ int forkitfunction(char **checks)
 
 	if (process == 0)
 	{
-		if (execve(checks[0], checks, NULL) == -1)
+		if (execve(all->cmdarray[0], all->cmdarray, NULL) == -1)
 			exit (1);
 		else
 			exit(0);
