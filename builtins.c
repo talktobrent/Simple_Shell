@@ -11,11 +11,14 @@
  */
 int builtins(const char *input, built_in *build, struct wrap *all)
 {
-	int count = 0, cmp = 0;
+	int count = 0; 
+	int cmp = 0;
+
+	(void)(input);
 
 	while (build[count].cmd != NULL)
 	{
-		printf("im in the built loop\n");
+		/*printf("im in the built loop\n");*/
 		while(build[count].cmd[cmp] == all->cmdarray[0][cmp])
 		{
 		 	if (all->cmdarray[0][cmp] == '\0')
@@ -31,7 +34,7 @@ int builtins(const char *input, built_in *build, struct wrap *all)
 	if (build[count].cmd ==NULL)
 		return (1);
 
-
+	return (0);
 }
 
 /**
@@ -46,17 +49,15 @@ int myenv (struct wrap *all)
 
 	while(all->env[count] != NULL)
 	{
-		printf("inloop\n");
-		while(all->env[count][length] != '\0')
+	        while(all->env[count][length] != '\0')
 			length++;
 
 		write(1, all->env[count], length);
+		write(1, "\n", 2);
 		length = 0;
 		count++;
 	}
-	write(1, "\n", 2);
 
-	free(all->line);
 	free(all->cmdarray);
 	return (0);
 }
@@ -69,8 +70,7 @@ int myenv (struct wrap *all)
  */
 int myexit (struct wrap *all)
 {
-	printf("about to exit\n");
-	free(all->line);
+        free(all->line);
 	free(all->cmdarray);
 	exit(all->retval);
 

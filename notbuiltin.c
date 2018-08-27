@@ -25,15 +25,15 @@ void notbuiltin(struct wrap *all)
 		size = stringprep(all->path, ':', '\0');
 		all->patharray = buildarray(all->path, ':', size);
 		all->retval = pathfork(all);
-		printf("before free allpath\n");
+		/*printf("before free allpath\n");*/
 		free(all->path);
-		printf("before free allarray\n");
+		/*printf("before free allarray\n");*/
 		free(all->patharray);
 	}
 
-	printf("before free commands\n");
-	//free(commands);                                             
-	printf("before free chkarray\n");
+	/*printf("before free commands\n");
+	free(commands);                                             
+	printf("before free chkarray\n");*/
 	free(all->cmdarray);
 
 }

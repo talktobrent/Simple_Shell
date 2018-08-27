@@ -23,16 +23,16 @@ void _error(struct wrap *all, char *string)
 	while(string[len3])
 		len3++;
 
-	write(1, all->argvzero, len1);
-	write(1, ": ", 2);
+	write(STDERR_FILENO, all->argvzero, len1);
+	write(STDERR_FILENO, ": ", 2);
 
-	write(1, code, len2);
-	write(1, ": ", 2);
+	write(STDERR_FILENO, code, len2);
+	write(STDERR_FILENO, ": ", 2);
 
-	write(1, all->cmdarray[0], len);
-	write(1, ": ", 2);
+	write(STDERR_FILENO, all->cmdarray[0], len);
+	write(STDERR_FILENO, ": ", 2);
 
-	write(1, string, len3);
-	write(1, "\n", 2);
+	write(STDERR_FILENO, string, len3);
+	write(STDERR_FILENO, "\n", 2);
 	free(code);
 }

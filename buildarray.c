@@ -20,26 +20,24 @@ char **buildarray(char *string, char delimeter, int elements)
         array = malloc(sizeof(char *) * (elements + 1));
 	if (array == NULL)
 	{
-//		write(2, "Not enough space/cannot allocate memory", 39);
-//		write(2, "\n", 2);
 		return(NULL);
 	}
 
-        printf("testaftermalloc\n");
+	/* printf("testaftermalloc\n");*/
 
         /* puts tokens into array elements */
         count = 0;
         array[count++] = strtok(string, &delimeter);
 
-        printf("func array [%d] is %s\n", count - 1, array[0]);
+	/* printf("func array [%d] is %s\n", count - 1, array[0]);*/
 
         while (count < elements)
         {
                 array[count++] = strtok(NULL, &delimeter);
-                if(array[count - 1] != NULL)
-                        printf("func array [%d] is %s\n", count - 1, array[count - 1]);
+                /*if(array[count - 1] != NULL)
+			printf("func array [%d] is %s\n", count - 1, array[count - 1]);*/
         }
         array[count] = NULL;
-	printf("last array %s\n", array[count]);
+	/*printf("last array %s\n", array[count]);*/
 	return (array);
 }

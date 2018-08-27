@@ -1,14 +1,17 @@
 #include "shell.h"
 
 /**
+ *main - runs customs shell
+ *@ac: UNUSED
+ *@argv: executable name
+ *@env: enviroment
  *
- *
- *
- *
+ *Return: 0 upon success
  */
 int main(int ac, char **argv, char **env)
 {
-        int status, size, checkbuilt;
+	int size;
+	int checkbuilt;
 
 	built_in checks [] = {
                 {"exit", myexit},
@@ -24,6 +27,7 @@ int main(int ac, char **argv, char **env)
 		all.env = env;
 		all.off = 0;
 
+		(void)(ac);
 	do {
 
 		all.line = getinput(&all);

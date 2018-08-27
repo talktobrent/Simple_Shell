@@ -20,7 +20,7 @@ int pathfork(struct wrap *all)
 		/*if path exists then execute(pathname, token, null)*/
 
 		append = _strcat(all->patharray[count], all->cmdarray[0]);
-		printf("append %s\n", append);
+		/*printf("append %s\n", append);*/
 
 		if (access(append, X_OK) == 0)
 		{
@@ -37,20 +37,20 @@ int pathfork(struct wrap *all)
 			else
 			{
 				wait(&status);
-				printf("winner: %s\n", append);
+				/*printf("winner: %s\n", append);*/
 				free(append);
 				break;
 			}
 		}
 		if (access(append, F_OK) == 0)
 		{
-			printf("Hit me!\n");
+			/*printf("Hit me!\n");*/
 			_error(all, "Permission denied");
 			free(append);
 			break;
 		}
 
-		printf("before free append in loop\n");
+		/*printf("before free append in loop\n");*/
 		free(append);
 		append = NULL;
 		count++;
@@ -62,7 +62,7 @@ int pathfork(struct wrap *all)
 		return(127);
 	}
 
-	printf("before path0\n");
-	printf("before patharry\n");
+	/*printf("before path0\n");
+	  printf("before patharry\n");*/
 	return(0);
 }
