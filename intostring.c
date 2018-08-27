@@ -1,10 +1,10 @@
 #include "shell.h"
+
 /**
- * inToString - converts int to string
+ * intoString - converts int to string
  * @n: integer given
  * Return: new string
  */
-
 char *intostring(int n)
 {
 

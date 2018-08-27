@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ *getinput - gets buffer from standard input
+ *@all: all variables
+ *
+ *Return: buffer
+ */
 char *getinput(struct wrap *all)
 {
         char *buffer;
@@ -33,11 +39,7 @@ char *getinput(struct wrap *all)
 	{
 		buffer[count] = '\n';
 		all->off = 1;
-		//_error(all, "");
-		//write(2, "$\n", 2);
-		//free(buffer);
-		//all->loop = 0);
-	}
+        }
 
         return (buffer);
 }

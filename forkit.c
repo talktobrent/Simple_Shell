@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ *forkitfunction - if user's is already a direct path to command, the function
+ *will execute
+ *@all: all variables
+ *
+ *Return: 0 upon success
+ */
 int forkitfunction(struct wrap *all)
 {
 	pid_t process = fork();

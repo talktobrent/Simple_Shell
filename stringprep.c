@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "shell.h"
 
-/*
+/**
  * stringprep - finds amount of arguments in a string
  * @delimeter: argument delimeter
  * @end: when to stop looking
@@ -15,7 +15,7 @@ int stringprep(char *string, char delimeter, char end)
         size_t count = 0;
 	int elements = 0;
 
-        printf("test\n");
+	/* printf("test\n");*/
 
         /* isolates arguments and finds element count, and replaces
 	 * tabs with spaces*/

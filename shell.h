@@ -9,23 +9,39 @@
 #include <sys/wait.h>                                                           
 #include <sys/types.h>
 
+/**
+ *struct wrap - a struct for all variables used to make custom shell
+ *@loop: shell loop count
+ *@retval: return values 
+ *@argvzero: executable name
+ *@env: enviroment array
+ *@line: command line buffer
+ *@cmdarray: array of command line arguments
+ *@path: entire PATH string
+ *@patharray: array of tokenized PATH directory
+ *@off: true or false integer to stop shell program
+ */
 struct wrap {
 	int loop;
 	int retval;
 	char *argvzero;
 	char **env;
 	char *line;
-	char *cmd;
-	char **cmdarray;
+        char **cmdarray;
 	char *path;
 	char **patharray;
 	int off;
 };
 
-struct funcs {
+/**
+ *struct funcs - matches user's input with built-in functions
+ *@cmd: string to trigger built-in command
+ *@call: built-in function to execute
+ */
+typedef struct funcs {
 	char *cmd;
 	int (*call)(struct wrap *all);
-};
+} built_in;
 
 
 
@@ -40,8 +56,10 @@ char *getinput(struct wrap *all);
 void _error(struct wrap *all, char *string);
 char *intostring(int n);
 
-	
-
+int builtins(const char *input, built_in *build, struct wrap *all);
+int myenv (struct wrap *all);
+int myexit (struct wrap *all);	
+void notbuiltin(struct wrap *all);
 #endif /* _SHELL_H_ */
 
 

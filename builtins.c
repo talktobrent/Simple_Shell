@@ -1,49 +1,80 @@
+#include "shell.h"
 
-
-
-int builtins(struct wrap *all)
+/**
+ *builtins - check to see if user's input is a builtin
+ *if so, command is executed
+ *@input: user's input
+ *@build: array of builtins
+ *@all: all variables
+ *
+ *Return: 0 upon success, 1 if input is not a built-in
+ */
+int builtins(const char *input, built_in *build, struct wrap *all)
 {
-	struct func builtins [] {
-		{"exit", myexit},
-		{"env", myenv},
-		{NULL, NULL}
-		};
+	int count = 0; 
+	int cmp = 0;
 
-	int count, cmp;
+	(void)(input);
 
-	while (builtins[count].cmd != NULL)
+	while (build[count].cmd != NULL)
 	{
-		while(builtins[count].cmd[cmp] == all->cmd[cmp])
+		/*printf("im in the built loop\n");*/
+		while(build[count].cmd[cmp] == all->cmdarray[0][cmp])
 		{
-		 	if (all->cmd[cmp] == '\0')
-				if (builtins[count].cmd[cmd] == '\0')
-					builtins[count].call(all);
+		 	if (all->cmdarray[0][cmp] == '\0')
+				if (build[count].cmd[cmp] == '\0')
+				{
+					build[count].call(all);
+					return (0);
+				}
 			cmp++;
 		}
-		count++;
+	        count++;
 	}
+	if (build[count].cmd ==NULL)
+		return (1);
 
-
+	return (0);
 }
 
-void myenv (struct wrap *all)
+/**
+ *myenv - prints current enviroment
+ *@all: all variables
+ *
+ *Return: 0 upon success
+ */
+int myenv (struct wrap *all)
 {
-	int count, length;
+	int count = 0, length = 0;
 
 	while(all->env[count] != NULL)
 	{
-		while(all->env[count][length] != '\0')
+	        while(all->env[count][length] != '\0')
 			length++;
 
 		write(1, all->env[count], length);
+		write(1, "\n", 2);
 		length = 0;
 		count++;
 	}
+
+	free(all->cmdarray);
+	return (0);
 }
 
-void myexit (struct wrap *all)
+/**
+ *myexit - exits customs shell
+ *@all: all variables
+ *
+ *Return: 0 upon success
+ */
+int myexit (struct wrap *all)
 {
+        free(all->line);
+	free(all->cmdarray);
+	exit(all->retval);
 
-
+	return (0);
+}
 
 
