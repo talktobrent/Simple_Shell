@@ -3,7 +3,7 @@
 #include "shell.h"
 #include <stdlib.h>
 
-/*
+/**
  * buildarray - builds array from given string containing delimeted arguments
  * delimeter: where to split arguments from string
  * Description: copies string, calls strtok to store each argument into an

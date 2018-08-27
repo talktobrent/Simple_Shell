@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ *_error: function to print custom errors for all error checks
+ *@all: all variables
+ *@string: custom message
+ */
 void _error(struct wrap *all, char *string)
 {
 	char *code;

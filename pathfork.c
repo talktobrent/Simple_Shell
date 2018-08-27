@@ -1,5 +1,13 @@
 #include "shell.h"
 
+/**
+ *pathfork - if user's input is not a direct path to command,
+ *this function will go through paths to find command
+ *then execute
+ *@all: all variables
+ *
+ *Return: 0 upon success
+ */
 int pathfork(struct wrap *all)
 {
 	char *append = NULL;

@@ -1,6 +1,14 @@
 #include "shell.h"
 
-
+/**
+ *builtins - check to see if user's input is a builtin
+ *if so, command is executed
+ *@input: user's input
+ *@build: array of builtins
+ *@all: all variables
+ *
+ *Return: 0 upon success, 1 if input is not a built-in
+ */
 int builtins(const char *input, built_in *build, struct wrap *all)
 {
 	int count = 0, cmp = 0;
@@ -26,6 +34,12 @@ int builtins(const char *input, built_in *build, struct wrap *all)
 
 }
 
+/**
+ *myenv - prints current enviroment
+ *@all: all variables
+ *
+ *Return: 0 upon success
+ */
 int myenv (struct wrap *all)
 {
 	int count = 0, length = 0;
@@ -42,9 +56,17 @@ int myenv (struct wrap *all)
 	}
 	write(1, "\n", 2);
 
-	return (count);
+	free(all->line);
+	free(all->cmdarray);
+	return (0);
 }
 
+/**
+ *myexit - exits customs shell
+ *@all: all variables
+ *
+ *Return: 0 upon success
+ */
 int myexit (struct wrap *all)
 {
 	printf("about to exit\n");

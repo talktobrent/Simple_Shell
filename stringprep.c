@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "shell.h"
 
-/*
+/**
  * stringprep - finds amount of arguments in a string
  * @delimeter: argument delimeter
  * @end: when to stop looking

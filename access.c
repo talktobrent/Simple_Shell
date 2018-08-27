@@ -25,10 +25,6 @@ int main(int ac, char **argv, char **env)
 		all.off = 0;
 
 	do {
-		/*all.line = NULL;
-		all.cmdarray = NULL;
-		all.path = NULL;
-		all.patharray = NULL;*/
 
 		all.line = getinput(&all);
 	        size = stringprep(all.line, ' ', '\n');
@@ -43,32 +39,7 @@ int main(int ac, char **argv, char **env)
 			all.retval = 0;
 			if (checkbuilt == 1)
 			{
-				if ((access(all.cmdarray[0], X_OK) == 0))
-				{
-					forkitfunction(&all);
-				}
-				else if ((access(all.cmdarray[0], F_OK) == 0))
-				{
-					_error(&all, "Permission denied");
-					all.retval = 126;
-				}
-				
-				else
-				{
-					all.path = pathfinder(&all);
-					size = stringprep(all.path, ':', '\0');
-					all.patharray = buildarray(all.path, ':', size);
-					all.retval = pathfork(&all);
-					printf("before free allpath\n");
-					free(all.path);
-					printf("before free allarray\n");
-					free(all.patharray);
-				}
-				
-				printf("before free commands\n");
-				//free(commands);
-				printf("before free chkarray\n");
-				free(all.cmdarray);
+				notbuiltin(&all);
 			}
 		}
 		free(all.line);
