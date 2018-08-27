@@ -52,12 +52,10 @@ int pathfork(char *argv, char **checks, char **patharray, int loop)
 	if(patharray[count] == NULL)
 	{
 		_error(argv, loop, checks[0], "not found");
-        	free(patharray);
 		return(127);
 	}
 
 	printf("before path0\n");
-        free(patharray);
 	printf("before patharry\n");
 	return(0);
 }
