@@ -11,6 +11,7 @@
 
 /**
  *struct wrap - a struct for all variables used to make custom shell
+ *@ac: number of arguments
  *@loop: shell loop count
  *@retval: return values 
  *@argvzero: executable name
@@ -22,6 +23,7 @@
  *@off: true or false integer to stop shell program
  */
 struct wrap {
+	int ac;
 	int loop;
 	int retval;
 	char *argvzero;

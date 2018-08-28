@@ -1,0 +1,18 @@
+.TH HSH "1" "30 August 2018" "v1"
+.SH NAME
+.B hsh
+- Command-line interpreter (shell)
+.SH SYNOPSIS
+#include "shell.h"
+.SH DESCRIPTION
+.B hsh
+is a custom command-line inerpreter. The user's input will be taken, parsed, then executed if found in one of the directories in PATH.
+.SH RETURN VALUE
+.B hsh
+will return zero (0) upon success, or any other number which represents failure or error
+.SH SEE ALSO
+.BR sh
+.SH BUGS
+No known bugs
+.SH AUTHOR
+Ca'Nese Curvin and Josh Jimenez

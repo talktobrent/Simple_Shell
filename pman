@@ -1,0 +1,25 @@
+.TH man 1 "31 July 2018" "1.0" "_printf"
+.SH NAME
+.B _printf
+- format and print data. 
+.SH SYNOPSIS
+_printf
+.I format [
+.I arguments ...]
+.SH DESCRIPTION
+This is a printf function that handles character and string format conversions
+Format characters:
+.IP c
+Arg is taken to be a character and is printed
+.IP s
+Arg is taken to be a string and the characters of the string are printed until the end if reached
+.IP d,i
+Arg is taken to be an integer and is printed in base 10
+.IP %
+Print a `%` if no format specifier is attached
+.SH SEE ALSO
+.I printf(3)
+.SH BUGS
+No known bugs
+.SH AUTHOR
+Ca'Nese Curvin and Josh Jimenez

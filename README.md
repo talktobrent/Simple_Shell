@@ -41,7 +41,7 @@ Compile with all `.c` files
 ```
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 ```
-enter shell with `./hsh`
+Enter shell with `./hsh`
 
 ## Example
 
