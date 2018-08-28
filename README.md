@@ -14,16 +14,16 @@ Our custom shell was developed and tested on `Ubuntu 14.04 LTS` via Vagrant in V
 |----------|------------------|
 | buildarray.c | Function to |
 | builtin.c | Built-in functions feat implementations of `env` and `exit` |
-| getinput.c |  |
+| getinput.c | Read arguments from standad input |
 | helpfun.c | Helper functions: forkit, _strdup, _strcat |
 | intostring.c | Custom itoa function |
-| notbuiltin.c |  |
-| pathfork.c |  |
-| pathfinder.c |  |
+| notbuiltin.c | This function will execute a command if input is not a builtin |
+| pathfork.c | This function will append user's input to each directory in PATH and execute if input is found |
+| pathfinder.c | This function finds enviroment varibale PATH and parses it by directories |
 | printerror.c | Custom error function |
 | shell.c | Main file |
 | shell.h | Header file that holds all structs and prototypes |
-| stringprep.c |  |
+| stringprep.c | This function parses user's input |
 
 ## Installation
 
