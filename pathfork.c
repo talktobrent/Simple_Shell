@@ -11,11 +11,11 @@
 int pathfork(struct wrap *all)
 {
 	char *append = NULL;
-        int count = 0, status;
+	int count = 0, status;
 	pid_t process;
 
 
-	while(all->patharray[count] != NULL)
+	while (all->patharray[count] != NULL)
 	{
 		/*if path exists then execute(pathname, token, null)*/
 
@@ -46,13 +46,13 @@ int pathfork(struct wrap *all)
 				free(append);
 				break;
 			}
-	        }
+		}
 		if (access(append, F_OK) == 0)
 		{
 			/*printf("Hit me!\n");*/
 			_error(all, "Permission denied");
 			free(append);
-			return(126);
+			return (126);
 		}
 
 		/*printf("before free append in loop\n");*/
@@ -61,13 +61,11 @@ int pathfork(struct wrap *all)
 		count++;
 	}
 
-	if(all->patharray[count] == NULL)
+	if (all->patharray[count] == NULL)
 	{
 		_error(all, "not found");
-		return(127);
+		return (127);
 	}
 
-	/*printf("before path0\n");
-	  printf("before patharry\n");*/
-	return(0);
+	return (0);
 }

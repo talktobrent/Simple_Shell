@@ -6,13 +6,11 @@ Simple-Shell is a recreation of a shell that takes user's input and executes it.
 ## Enviroment
 Our custom shell was developed and tested on `Ubuntu 14.04 LTS` via Vagrant in VirtualBox.
 
-## Features
-
 ## Repo Contents
 
 | **File** | **Description** |
 |----------|------------------|
-| buildarray.c | Function to |
+| buildarray.c | Function to build array from a parsed string |
 | builtin.c | Built-in functions feat implementations of `env` and `exit` |
 | getinput.c | Read arguments from standad input |
 | helpfun.c | Helper functions: forkit, _strdup, _strcat |
@@ -68,7 +66,7 @@ total 100
 -rw-rw-r-- 1 vagrant vagrant   887 Aug 28 04:19 shell.c
 -rw-rw-r-- 1 vagrant vagrant  1937 Aug 28 04:02 shell.h
 -rw-rw-r-- 1 vagrant vagrant  1145 Aug 27 23:27 stringprep.c
-$ 
+$
 ```
 
 Non-Interactive Mode
@@ -94,7 +92,7 @@ total 100
 -rw-rw-r-- 1 vagrant vagrant   887 Aug 28 04:19 shell.c
 -rw-rw-r-- 1 vagrant vagrant  1937 Aug 28 04:02 shell.h
 -rw-rw-r-- 1 vagrant vagrant  1145 Aug 27 23:27 stringprep.c
-[vagrant@vagrant-ubuntu-trusty-64 Simple_Shell]$ 
+[vagrant@vagrant-ubuntu-trusty-64 Simple_Shell]$
 ```
 
 ## Exiting Simple_Shell

@@ -8,14 +8,14 @@
 .B hsh
 is a custom command-line inerpreter. The user's input will be taken, parsed, then executed if found in one of the directories in PATH. This shell is limited to commands found in either one of the PATH directories and also limited to certain shell builtins (env and exit). We have not handled piped commands, redirections, or any advanced tasks.
 .SS Invocation
-The shell will usually be ran in 
-.I interactive 
-mode by reading input from the keyboard, but this shell also supports 
-.I non-interactive 
-mode. In a 
-.I non-interactive 
-mode, users are able to pipe a command into the shell or execute a shell script in 
-.B hsh. 
+The shell will usually be ran in
+.I interactive
+mode by reading input from the keyboard, but this shell also supports
+.I non-interactive
+mode. In a
+.I non-interactive
+mode, users are able to pipe a command into the shell or execute a shell script in
+.B hsh.
 In this way, the shell will only open to execute the command then immediately close.
 .SS Supported Commands
 .sp
@@ -26,7 +26,7 @@ ls
 pwd
       prints working directory
 .sp
-cat 
+cat
 .I [[flag] [file ...]]
       read and writes files to standard output and displays certains formats
       depending on flag entered by user
@@ -41,16 +41,16 @@ env
       prints enviroment variables
 .sp
 exit
-      exits out of 
+      exits out of
 .B hsh
 and returns to user's original shell
 .SH RETURN VALUE
 .B hsh
 will return zero (0) upon success, or any other number which represents failure or error
 .SH EXAMPLE
-Below is two examples, 
-.I interactive 
-and 
+Below is two examples,
+.I interactive
+and
 .I non-interactive,
 of how use
 .B hsh
