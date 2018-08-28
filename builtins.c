@@ -49,16 +49,23 @@ int myenv (struct wrap *all)
 
 	while(all->env[count] != NULL)
 	{
-	        while(all->env[count][length] != '\0')
-			length++;
+		if (all->ac != 1)
+		{
+			_error(all, "No such file or directory");
+			break;
+		}
 
+		while(all->env[count][length] != '\0')
+			length++;
+	        
 		write(1, all->env[count], length);
 		write(1, "\n", 2);
+        
 		length = 0;
 		count++;
-	}
 
-	free(all->cmdarray);
+        }
+        free(all->cmdarray);
 	return (0);
 }
 
@@ -70,6 +77,8 @@ int myenv (struct wrap *all)
  */
 int myexit (struct wrap *all)
 {
+	if (all->ac != 1)
+		_error(all, "Illegal number");
         free(all->line);
 	free(all->cmdarray);
 	exit(all->retval);

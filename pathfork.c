@@ -25,10 +25,10 @@ int pathfork(struct wrap *all)
 		if (access(append, X_OK) == 0)
 		{
 			process = fork();
-
+			
 			if (process == 0)
 			{
-
+				
 				if (execve(append, all->cmdarray, all->patharray) == -1)
 					perror("Error");
 				else
@@ -41,7 +41,7 @@ int pathfork(struct wrap *all)
 				free(append);
 				break;
 			}
-		}
+	        }
 		if (access(append, F_OK) == 0)
 		{
 			/*printf("Hit me!\n");*/
