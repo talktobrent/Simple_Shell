@@ -26,22 +26,22 @@ int main(int ac, char **argv, char **env)
 		all.argvzero = argv[0];
 		all.env = env;
 		all.off = 0;
-		all.ac = 0;
+		all.size = 0;
 
 		(void)(ac);
 	do {
 
 		all.line = getinput(&all);
-	        size = stringprep(all.line, ' ', '\n');
+	        all.size = stringprep(all.line, ' ', '\n');
 
-		if (size > 0)
-			all.cmdarray = buildarray(all.line, ' ', size);
+		if (all.size > 0)
+			all.cmdarray = buildarray(all.line, ' ', all.size);
 
 		if (all.cmdarray != NULL)
 		{
 			checkbuilt = builtins(all.cmdarray[0], checks, &all);
-			
 			all.retval = 0;
+			
 			if (checkbuilt == 1)
 			{
 				notbuiltin(&all);

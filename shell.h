@@ -23,7 +23,7 @@
  *@off: true or false integer to stop shell program
  */
 struct wrap {
-	int ac;
+	int size;
 	int loop;
 	int retval;
 	char *argvzero;

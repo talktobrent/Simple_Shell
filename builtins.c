@@ -16,6 +16,8 @@ int builtins(const char *input, built_in *build, struct wrap *all)
 
 	(void)(input);
 
+	if (all->size > 1)
+		return (1);
 	while (build[count].cmd != NULL)
 	{
 		/*printf("im in the built loop\n");*/
@@ -49,12 +51,6 @@ int myenv (struct wrap *all)
 
 	while(all->env[count] != NULL)
 	{
-		if (all->ac != 1)
-		{
-			_error(all, "No such file or directory");
-			break;
-		}
-
 		while(all->env[count][length] != '\0')
 			length++;
 	        
@@ -77,8 +73,6 @@ int myenv (struct wrap *all)
  */
 int myexit (struct wrap *all)
 {
-	if (all->ac != 1)
-		_error(all, "Illegal number");
         free(all->line);
 	free(all->cmdarray);
 	exit(all->retval);
