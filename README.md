@@ -28,13 +28,19 @@ Our custom shell was developed and tested on `Ubuntu 14.04 LTS` via Vagrant in V
 ## Installation
 
 Clone the repository
-`https://github.com/ceecurvin/Simple_Shell.git`
+```
+https://github.com/ceecurvin/Simple_Shell.git
+```
 
 Change directory to Simple_Shell
-`cd Simple_Shell/`
+```
+cd Simple_Shell/
+```
 
 Compile with all `.c` files
-`gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
+```
+gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+```
 enter shell with `./hsh`
 
 ## Example
@@ -96,7 +102,9 @@ Simply type `exit`
 
 ## Notes
 For information of Simple_Shell, visit the man page
-`man -l man_1_simple_shell`
+```
+man -l man_1_simple_shell
+```
 
 ## Authors
 * [**Ca'Nese Curvin**]()
