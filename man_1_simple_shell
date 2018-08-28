@@ -6,13 +6,108 @@
 #include "shell.h"
 .SH DESCRIPTION
 .B hsh
-is a custom command-line inerpreter. The user's input will be taken, parsed, then executed if found in one of the directories in PATH.
+is a custom command-line inerpreter. The user's input will be taken, parsed, then executed if found in one of the directories in PATH. This shell is limited to commands found in either one of the PATH directories and also limited to certain shell builtins (env and exit). We have not handled piped commands, redirections, or any advanced tasks.
+.SS Invocation
+The shell will usually be ran in 
+.I interactive 
+mode by reading input from the keyboard, but this shell also supports 
+.I non-interactive 
+mode. In a 
+.I non-interactive 
+mode, users are able to pipe a command into the shell or execute a shell script in 
+.B hsh. 
+In this way, the shell will only open to execute the command then immediately close.
+.SS Supported Commands
+.sp
+ls
+.I [[flags]...[arguments]]
+      lists files in the current directory using flags entered by user
+.sp
+pwd
+      prints working directory
+.sp
+cat 
+.I [[flag] [file ...]]
+      read and writes files to standard output and displays certains formats
+      depending on flag entered by user
+.sp
+echo
+.I [arguments]
+      writes argument(s) that the user enters to standard ouput then prints
+      a newline
+.SS Suported Builtins
+.sp
+env
+      prints enviroment variables
+.sp
+exit
+      exits out of 
+.B hsh
+and returns to user's original shell
 .SH RETURN VALUE
 .B hsh
 will return zero (0) upon success, or any other number which represents failure or error
+.SH EXAMPLE
+Below is two examples, 
+.I interactive 
+and 
+.I non-interactive,
+of how use
+.B hsh
+
+
+----Interactive-----
+.P
+.HP 2
+$ ./hsh
+.br
+.B $
+pwd
+.br
+/home/directory
+.br
+.B $
+echo This is hsh shell
+.br
+This is hsh shell
+.br
+.B $
+exit 101
+.P
+$ echo $?
+.br
+101
+.br
+.br
+--------------------
+.br
+--Non-Interactive---
+
+$ echo "pwd" | ./hsh
+.br
+/home/directory
+.br
+$ echo "touch myfile" | ./hsh
+.P
+.HP 2
+$ ./hsh
+.br
+.B $
+ls
+.br
+myfile
+.br
+.B $
+exit
+.P
+$
+.br
+--------------------
 .SH SEE ALSO
-.BR sh
+.BR sh(1)
 .SH BUGS
 No known bugs
 .SH AUTHOR
-Ca'Nese Curvin and Josh Jimenez
+Ca'Nese Curvin <357@holbertonschool.com
+.PP
+Brent Janski <361@holbertonschool.com>
