@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * intoString - converts int to string
- * @n: integer given
+ * intostring - converts int to string
+ * @x: integer given
  * Return: new string
  */
 char *intostring(int x)

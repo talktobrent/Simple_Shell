@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- *notbuiltin - if user's input is not a builtin, this function will execute their
- *input or return error if input cannot be executed
- *
+ *notbuiltin - if user's input is not a builtin,
+ *this function will execute their
+ *@all: all variables
  */
 void notbuiltin(struct wrap *all)
 {
@@ -34,9 +34,6 @@ void notbuiltin(struct wrap *all)
 		/*printf("before free allarray\n");*/
 		free(all->patharray);
 	}
-	/*printf("before free commands\n");
-	free(commands);
-	printf("before free chkarray\n");*/
 	free(all->cmdarray);
 
 }

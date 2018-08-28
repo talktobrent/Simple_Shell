@@ -11,24 +11,23 @@
 
 int forkitfunction(struct wrap *all)
 {
-        pid_t process = fork();
+	pid_t process = fork();
 
-        if (process == -1)
-                return (-1);
-
-        if (process == 0)
-        {
-                if (execve(all->cmdarray[0], all->cmdarray, all->env) == -1)
-                        _exit(1);
-                else
-                        exit(0);
-        }
-        else
-        {
-                wait(NULL);
-                return (0);
-        }
-        return (0);
+	if (process == -1)
+		return (-1);
+	if (process == 0)
+	{
+		if (execve(all->cmdarray[0], all->cmdarray, all->env) == -1)
+			_exit(1);
+		else
+			exit(0);
+	}
+	else
+	{
+		wait(NULL);
+		return (0);
+	}
+	return (0);
 }
 
 /**
@@ -71,41 +70,37 @@ char *_strdup(char *str)
  */
 char *_strcat(char *dest, char *src)
 {
+	int dest_count, src_count, count;
+	char *space;
 
-        int dest_count, src_count, count;
-        char *space;
-
-        src_count = 0;
+	src_count = 0;
 	dest_count = 0;
 
-        while (dest[dest_count] != 0)
-                dest_count++;
+	while (dest[dest_count] != 0)
+		dest_count++;
 
-        while(src[src_count] != '\0')
-                src_count++;
+	while (src[src_count] != '\0')
+		src_count++;
 
-        space = malloc(sizeof(char) * (dest_count + src_count) + 2);
+	space = malloc(sizeof(char) * (dest_count + src_count) + 2);
 	if (space == NULL)
 		printf("malloc fail1\n");
 
-        count = 0;
-        while(dest[count] != '\0')
-        {
-                space[count] = dest[count];
-                count++;
-        }
+	count = 0;
+	while (dest[count] != '\0')
+	{
+		space[count] = dest[count];
+		count++;
+	}
 
-        /* 47 is forward slash*/
-        space[count++] = 47;
+/* 47 is forward slash*/
+	space[count++] = 47;
 
 	src_count = 0;
-        while (src[src_count] != 0)
-                space[count++] = src[src_count++];
+	while (src[src_count] != 0)
+		space[count++] = src[src_count++];
 
 	space[count] = 0;
 
-        return (space);
+	return (space);
 }
-
-
-

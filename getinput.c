@@ -8,9 +8,9 @@
  */
 char *getinput(struct wrap *all)
 {
-        char *buffer;
-        int count, check = 0;
-        size_t size = 0;
+	char *buffer;
+	int count, check = 0;
+	size_t size = 0;
 
 	if (isatty(0) == 1)
 		write(STDOUT_FILENO, "$ ", 2);
@@ -21,15 +21,14 @@ char *getinput(struct wrap *all)
 		exit(all->retval);
 	}
 
-
-        check = getline(&buffer, &size, stdin);
+	check = getline(&buffer, &size, stdin);
 	if (check == -1 || buffer == NULL || buffer[0] == 0)
-        {
-                if (isatty(0) == 1)
+	{
+		if (isatty(0) == 1)
 			write(STDOUT_FILENO, "\n", 1);
 		free(buffer);
 		exit(all->retval);
-        }
+	}
 
 	count = 0;
 	while (buffer[count] != '\0')
@@ -38,5 +37,5 @@ char *getinput(struct wrap *all)
 	if (buffer[count - 1] != '\n')
 		all->off = 1;
 
-        return (buffer);
+	return (buffer);
 }

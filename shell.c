@@ -26,7 +26,7 @@ int main(int ac, char **argv, char **env)
 	do {
 
 		all.line = getinput(&all);
-	        all.size = stringprep(all.line, ' ', '\n');
+		all.size = stringprep(all.line, ' ', '\n');
 
 		if (all.size > 0)
 		{
@@ -56,12 +56,12 @@ int main(int ac, char **argv, char **env)
 
 		all.cmdarray = NULL;
 
-		if (all.loop = INT_MAX)
+		if (all.loop == INT_MAX)
 			all.loop = 0;
 		all.loop++;
 
 	} while (all.loop > 0);
 
-        return (0);
+	return (0);
 }
 

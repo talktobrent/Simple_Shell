@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- *_error: function to print custom errors for all error checks
+ *_error - function to print custom errors for all error checks
  *@all: all variables
  *@string: custom message
  */
@@ -14,13 +14,13 @@ void _error(struct wrap *all, char *string)
 		len++;
 
 	while (all->argvzero[len1] != '\0')
-                len1++;
+		len1++;
 
 	code = intostring(all->loop);
-	while(code[len2])
+	while (code[len2])
 		len2++;
 
-	while(string[len3])
+	while (string[len3])
 		len3++;
 
 	write(STDERR_FILENO, all->argvzero, len1);
