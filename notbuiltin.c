@@ -18,21 +18,24 @@ void notbuiltin(struct wrap *all)
 		_error(all, "Permission denied");
 		all->retval = 126;
 	}
-
 	else
 	{
 		all->path = pathfinder(all);
 		size = stringprep(all->path, ':', '\0');
 		all->patharray = buildarray(all->path, ':', size);
+		if (all->patharray == NULL)
+		{
+			_error(all, "Cannot allocate memory");
+			all->retval = 1;
+		}
 		all->retval = pathfork(all);
 		/*printf("before free allpath\n");*/
 		free(all->path);
 		/*printf("before free allarray\n");*/
 		free(all->patharray);
 	}
-
 	/*printf("before free commands\n");
-	free(commands);                                             
+	free(commands);
 	printf("before free chkarray\n");*/
 	free(all->cmdarray);
 

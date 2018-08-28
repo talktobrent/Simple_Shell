@@ -9,12 +9,16 @@
  *
  *Return: 0 upon success, 1 if input is not a built-in
  */
-int builtins(const char *input, built_in *build, struct wrap *all)
+int builtins(struct wrap *all)
 {
-	int count = 0; 
+	int count = 0;
 	int cmp = 0;
 
-	(void)(input);
+	built_in build [] = {
+		{"exit", myexit},
+		{"env", myenv},
+		{NULL, NULL}
+		};
 
 	if (all->size > 1)
 		return (1);
@@ -53,10 +57,10 @@ int myenv (struct wrap *all)
 	{
 		while(all->env[count][length] != '\0')
 			length++;
-	        
-		write(1, all->env[count], length);
-		write(1, "\n", 2);
-        
+
+		write(STDOUT_FILENO, all->env[count], length);
+		write(STDOUT_FILENO, "\n", 2);
+
 		length = 0;
 		count++;
 

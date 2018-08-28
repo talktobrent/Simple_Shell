@@ -3,11 +3,12 @@
 
 /**
  *forkitfunction - if user's is already a direct path to command, the function
- *will execute 
- *@all: all variables 
+ *will execute
+ *@all: all variables
  *
- *Return: 0 upon success 
+ *Return: 0 upon success
  */
+
 int forkitfunction(struct wrap *all)
 {
         pid_t process = fork();
@@ -17,8 +18,8 @@ int forkitfunction(struct wrap *all)
 
         if (process == 0)
         {
-                if (execve(all->cmdarray[0], all->cmdarray, NULL) == -1)
-                        exit (1);
+                if (execve(all->cmdarray[0], all->cmdarray, all->env) == -1)
+                        _exit(1);
                 else
                         exit(0);
         }

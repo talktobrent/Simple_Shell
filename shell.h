@@ -8,6 +8,7 @@
 #include "shell.h"                                                              
 #include <sys/wait.h>                                                           
 #include <sys/types.h>
+#include <limits.h>
 
 /**
  *struct wrap - a struct for all variables used to make custom shell
@@ -56,9 +57,9 @@ int stringprep(char *string, char delimeter, char end);
 char *pathfinder(struct wrap *all);
 char *getinput(struct wrap *all);
 void _error(struct wrap *all, char *string);
-char *intostring(int n);
+char *intostring(int x);
 
-int builtins(const char *input, built_in *build, struct wrap *all);
+int builtins(struct wrap *all);
 int myenv (struct wrap *all);
 int myexit (struct wrap *all);	
 void notbuiltin(struct wrap *all);

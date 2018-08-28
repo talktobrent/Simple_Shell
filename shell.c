@@ -2,22 +2,16 @@
 
 /**
  *main - runs customs shell
- *@ac: UNUSED
- *@argv: executable name
- *@env: enviroment
+ *@ac: argument count, UNUSED
+ *@argv: argument array
+ *@env: environ ment array
  *
- *Return: 0 upon success
+ *Return: 0 upon success, others on error
  */
+
 int main(int ac, char **argv, char **env)
 {
-	int size;
 	int checkbuilt;
-
-	built_in checks [] = {
-                {"exit", myexit},
-                {"env", myenv},
-                {NULL, NULL}
-	};
 
 	struct wrap all;
 
@@ -35,19 +29,35 @@ int main(int ac, char **argv, char **env)
 	        all.size = stringprep(all.line, ' ', '\n');
 
 		if (all.size > 0)
+		{
 			all.cmdarray = buildarray(all.line, ' ', all.size);
+			if (all.cmdarray == NULL)
+			{
+				_error(&all, "Cannot allocate memory");
+				all.retval = 1;
+			}
+		}
 
 		if (all.cmdarray != NULL)
 		{
-			checkbuilt = builtins(all.cmdarray[0], checks, &all);
+			checkbuilt = builtins(&all);
+
 			all.retval = 0;
-			
+
 			if (checkbuilt == 1)
 			{
 				notbuiltin(&all);
 			}
 		}
+
 		free(all.line);
+
+		all.size = 0;
+
+		all.cmdarray = NULL;
+
+		if (all.loop = INT_MAX)
+			all.loop = 0;
 		all.loop++;
 
 	} while (all.loop > 0);

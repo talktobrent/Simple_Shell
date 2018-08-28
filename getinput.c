@@ -13,11 +13,11 @@ char *getinput(struct wrap *all)
         size_t size = 0;
 
 	if (isatty(0) == 1)
-		write(2, "$ ", 2);
+		write(STDOUT_FILENO, "$ ", 2);
 
 	if (all->off == 1)
 	{
-		write(2, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
 		exit(all->retval);
 	}
 
@@ -26,7 +26,7 @@ char *getinput(struct wrap *all)
 	if (check == -1 || buffer == NULL || buffer[0] == 0)
         {
                 if (isatty(0) == 1)
-			write(2, "\n", 1);
+			write(STDOUT_FILENO, "\n", 1);
 		free(buffer);
 		exit(all->retval);
         }
@@ -36,10 +36,7 @@ char *getinput(struct wrap *all)
 		count++;
 
 	if (buffer[count - 1] != '\n')
-	{
-		buffer[count] = '\n';
 		all->off = 1;
-        }
 
         return (buffer);
 }

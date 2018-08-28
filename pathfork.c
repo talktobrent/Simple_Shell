@@ -20,19 +20,24 @@ int pathfork(struct wrap *all)
 		/*if path exists then execute(pathname, token, null)*/
 
 		append = _strcat(all->patharray[count], all->cmdarray[0]);
+		if (append == NULL)
+		{
+			_error(all, "Cannot allocate memory");
+			all->retval = 1;
+		}
 		/*printf("append %s\n", append);*/
 
 		if (access(append, X_OK) == 0)
 		{
 			process = fork();
-			
+
 			if (process == 0)
 			{
-				
-				if (execve(append, all->cmdarray, all->patharray) == -1)
-					perror("Error");
+
+				if (execve(append, all->cmdarray, all->env) == -1)
+					_exit(1);
 				else
-					return(0);
+					exit(0);
 			}
 			else
 			{
@@ -47,7 +52,7 @@ int pathfork(struct wrap *all)
 			/*printf("Hit me!\n");*/
 			_error(all, "Permission denied");
 			free(append);
-			break;
+			return(126);
 		}
 
 		/*printf("before free append in loop\n");*/

@@ -5,10 +5,9 @@
  * @n: integer given
  * Return: new string
  */
-char *intostring(int n)
+char *intostring(int x)
 {
 
-	long x;
 	int count, adjust;
 	char *string;
 
@@ -18,20 +17,8 @@ char *intostring(int n)
 	if (string == NULL)
 		return (NULL);
 
-	/* cast the passed integer n into a long variable */
-	x = n;
-
 	/* initialize count to zero */
 	count = 0;
-
-	/* if x is a negative number */
-	if (x < 0)
-	{
-		/* append the negative sign */
-		string[count++] = '-';
-		/* convert the number to a positive number */
-		x = x * -1;
-	}
 
 	/* if x is greater than 9 */
 	if (x > 9)
