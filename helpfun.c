@@ -11,6 +11,7 @@
 
 int forkitfunction(struct wrap *all)
 {
+	int status;
 	pid_t process = fork();
 
 	if (process == -1)
@@ -18,14 +19,19 @@ int forkitfunction(struct wrap *all)
 	if (process == 0)
 	{
 		if (execve(all->cmdarray[0], all->cmdarray, all->env) == -1)
+		{
+			perror("Error ");
 			_exit(1);
+		}
 		else
 			exit(0);
 	}
 	else
 	{
-		wait(NULL);
-		return (0);
+		wait(&status);
+		if (WIFEXITED(status))
+			all->retval = WEXITSTATUS(status);
+		return (all->retval);
 	}
 	return (0);
 }

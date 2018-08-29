@@ -25,7 +25,6 @@ int pathfork(struct wrap *all)
 			_error(all, "Cannot allocate memory");
 			all->retval = 1;
 		}
-		/*printf("append %s\n", append);*/
 
 		if (access(append, X_OK) == 0)
 		{
@@ -35,27 +34,30 @@ int pathfork(struct wrap *all)
 			{
 
 				if (execve(append, all->cmdarray, all->env) == -1)
+				{
+					perror("Error ");
 					_exit(1);
+				}
 				else
+				{
 					exit(0);
+				}
 			}
 			else
 			{
 				wait(&status);
-				/*printf("winner: %s\n", append);*/
+				if (WIFEXITED(status))
+					all->retval = WEXITSTATUS(status);
 				free(append);
-				break;
+				return (all->retval);
 			}
 		}
 		if (access(append, F_OK) == 0)
 		{
-			/*printf("Hit me!\n");*/
 			_error(all, "Permission denied");
 			free(append);
 			return (126);
 		}
-
-		/*printf("before free append in loop\n");*/
 		free(append);
 		append = NULL;
 		count++;
