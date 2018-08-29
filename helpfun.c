@@ -89,8 +89,8 @@ char *_strcat(char *dest, char *src)
 		src_count++;
 
 	space = malloc(sizeof(char) * (dest_count + src_count) + 2);
-	if (space == NULL)
-		printf("malloc fail1\n");
+	if (space = NULL)
+		return(NULL);
 
 	count = 0;
 	while (dest[count] != '\0')
