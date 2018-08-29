@@ -23,7 +23,7 @@ int pathfork(struct wrap *all)
 		if (append == NULL)
 		{
 			_error(all, "Cannot allocate memory");
-			all->retval = 1;
+			return(1);
 		}
 
 		if (access(append, X_OK) == 0)
