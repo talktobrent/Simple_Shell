@@ -49,7 +49,6 @@ int main(int ac, char **argv, char **env)
 				notbuiltin(&all);
 			}
 		}
-
 		free(all.line);
 
 		all.size = 0;

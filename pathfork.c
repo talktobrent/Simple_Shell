@@ -14,11 +14,10 @@ int pathfork(struct wrap *all)
 	int count = 0, status;
 	pid_t process;
 
-
 	while (all->patharray[count] != NULL)
 	{
-		/*if path exists then execute(pathname, token, null)*/
 
+/*if path exists then execute(pathname, token, null)*/
 		append = _strcat(all->patharray[count], all->cmdarray[0]);
 		if (append == NULL)
 		{

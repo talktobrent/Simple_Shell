@@ -25,6 +25,7 @@ void notbuiltin(struct wrap *all)
 		{
 			size = stringprep(all->path, ':', '\0');
 			all->patharray = buildarray(all->path, ':', size);
+
 			if (all->patharray == NULL)
 			{
 				_error(all, "Cannot allocate memory");
@@ -35,7 +36,10 @@ void notbuiltin(struct wrap *all)
 			free(all->patharray);
 		}
 		else
-			_error(all, "Cannot find PATH");
+		{
+			_error(all, "not found");
+			all->retval = 127;
+		}
 	}
 	free(all->cmdarray);
 
