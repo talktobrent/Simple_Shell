@@ -22,9 +22,8 @@ char *pathfinder(struct wrap *all)
 	{
 		compare = array[count];
 		while (*compare++ == path[count2])
-		{ 
 			count2++;
-		}
+
 		if (count2 == 5)
 		{
 			string = compare - 1;
