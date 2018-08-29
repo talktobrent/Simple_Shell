@@ -60,7 +60,7 @@ char *pathfinder(struct wrap *all);
 char *getinput(struct wrap *all);
 void _error(struct wrap *all, char *string);
 char *intostring(int x);
-
+int _strncmp(char *s1, char *s2);
 int builtins(struct wrap *all);
 int myenv(struct wrap *all);
 int myexit(struct wrap *all);
