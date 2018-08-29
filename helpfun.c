@@ -15,12 +15,12 @@ int forkitfunction(struct wrap *all)
 	pid_t process = fork();
 
 	if (process == -1)
-		return (-1);
+		_error(all, NULL);
 	if (process == 0)
 	{
 		if (execve(all->cmdarray[0], all->cmdarray, all->env) == -1)
 		{
-			perror("Error ");
+			_error(all, NULL);
 			_exit(1);
 		}
 		else
