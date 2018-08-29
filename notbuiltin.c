@@ -21,18 +21,21 @@ void notbuiltin(struct wrap *all)
 	else
 	{
 		all->path = pathfinder(all);
-		size = stringprep(all->path, ':', '\0');
-		all->patharray = buildarray(all->path, ':', size);
-		if (all->patharray == NULL)
+		if (all->path != NULL)
 		{
-			_error(all, "Cannot allocate memory");
-			all->retval = 1;
+			size = stringprep(all->path, ':', '\0');
+			all->patharray = buildarray(all->path, ':', size);
+			if (all->patharray == NULL)
+			{
+				_error(all, "Cannot allocate memory");
+				all->retval = 1;
+			}
+			all->retval = pathfork(all);
+			free(all->path);
+			free(all->patharray);
 		}
-		all->retval = pathfork(all);
-		/*printf("before free allpath\n");*/
-		free(all->path);
-		/*printf("before free allarray\n");*/
-		free(all->patharray);
+		else
+			_error(all, "Cannot find PATH");
 	}
 	free(all->cmdarray);
 

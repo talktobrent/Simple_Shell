@@ -30,17 +30,15 @@ int pathfork(struct wrap *all)
 		{
 			process = fork();
 
+			if (process == -1)
+				_error(all, NULL);
 			if (process == 0)
 			{
 
 				if (execve(append, all->cmdarray, all->env) == -1)
 				{
-					perror("Error ");
+					_error(all, NULL);
 					_exit(1);
-				}
-				else
-				{
-					exit(0);
 				}
 			}
 			else

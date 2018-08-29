@@ -40,7 +40,10 @@ char *pathfinder(struct wrap *all)
 		count2 = 0;
 	}
 
-	string = _strdup(string);
+	if (array[count] != NULL)
+		string = _strdup(string);
+	else
+		string = NULL;
 
 	return (string);
 }
