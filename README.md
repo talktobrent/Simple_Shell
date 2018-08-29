@@ -105,5 +105,5 @@ man -l man_1_simple_shell
 ```
 
 ## Authors
-* [**Ca'Nese Curvin**]()
-* [**Brent Janksi**]()
+* [**Ca'Nese Curvin**](https://github.com/ceecurvin)
+* [**Brent Janksi**](https://github.com/talktobrent)
