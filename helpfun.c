@@ -90,7 +90,7 @@ char *_strcat(char *dest, char *src)
 
 	space = malloc(sizeof(char) * (dest_count + src_count) + 2);
 	if (space == NULL)
-		return(NULL);
+		return (NULL);
 
 	count = 0;
 	while (dest[count] != '\0')
