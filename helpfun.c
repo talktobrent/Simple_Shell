@@ -89,7 +89,7 @@ char *_strcat(char *dest, char *src)
 		src_count++;
 
 	space = malloc(sizeof(char) * (dest_count + src_count) + 2);
-	if (space = NULL)
+	if (space == NULL)
 		return(NULL);
 
 	count = 0;
