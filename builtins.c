@@ -76,6 +76,7 @@ int myexit(struct wrap *all)
 {
 	free(all->line);
 	free(all->cmdarray);
+
 	exit(all->retval);
 
 	return (0);

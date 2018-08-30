@@ -12,12 +12,12 @@
  *Return: array
  */
 
-char **buildarray(char *string, char delimeter, int elements)
+char **buildarray(char *string, char *delimeter, int elements)
 {
 	int count;
-	char **array;
+	char **array = NULL;
 
-/* builds array for size of pointers * element count + 1 for NULL element */
+/*array for size of pointers * element count + 1 for NULL element */
 	array = malloc(sizeof(char *) * (elements + 1));
 	if (array == NULL)
 	{
@@ -26,11 +26,10 @@ char **buildarray(char *string, char delimeter, int elements)
 
 /* puts tokens into array elements */
 	count = 0;
-	array[count++] = strtok(string, &delimeter);
-
+	array[count++] = strtok(string, delimeter);
 	while (count < elements)
 	{
-		array[count++] = strtok(NULL, &delimeter);
+		array[count++] = strtok(NULL, delimeter);
 	}
 	array[count] = NULL;
 	return (array);

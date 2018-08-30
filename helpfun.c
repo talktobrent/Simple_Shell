@@ -44,7 +44,7 @@ int forkitfunction(struct wrap *all)
 
 char *_strdup(char *str)
 {
-	char *strptr;
+	char *strptr = NULL;
 	int count;
 
 	if (str == NULL)
@@ -77,7 +77,7 @@ char *_strdup(char *str)
 char *_strcat(char *dest, char *src)
 {
 	int dest_count, src_count, count;
-	char *space;
+	char *space = NULL;
 
 	src_count = 0;
 	dest_count = 0;

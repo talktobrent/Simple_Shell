@@ -8,7 +8,7 @@
  */
 char *getinput(struct wrap *all)
 {
-	char *buffer;
+	char *buffer = NULL;
 	int count, check = 0;
 	size_t size = 0;
 
