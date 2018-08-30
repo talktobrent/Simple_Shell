@@ -7,7 +7,7 @@
  */
 void _error(struct wrap *all, char *string)
 {
-	char *code;
+	char *code = NULL;
 	int len = 0, len1 = 0, len2 = 0, len3 = 0;
 
 	while (all->cmdarray[0][len])

@@ -13,7 +13,6 @@ int stringprep(char *string, char delimeter, char end)
 {
 	size_t count = 0;
 	int elements = 0;
-
 	/* printf("test\n");*/
 
 	/**
