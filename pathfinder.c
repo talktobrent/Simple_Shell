@@ -11,7 +11,7 @@
 char *pathfinder(char **env)
 {
 	int count, count2;
-	char *string = NULL, **array = NULL, *compare = NULL, *path = "PATH=";
+	char *string = NULL, *path = "PATH=";
 
 	count = 0;
 	count2 = 0;
@@ -23,8 +23,8 @@ char *pathfinder(char **env)
 
 		if (count2 == 5)
 		{
-			string = &env[count][count2]
-				break;
+			string = &env[count][count2];
+			break;
 		}
 
 		count++;
