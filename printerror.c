@@ -33,6 +33,6 @@ void _error(struct wrap *all, char *string)
 	write(STDERR_FILENO, ": ", 2);
 
 	write(STDERR_FILENO, string, len3);
-	write(STDERR_FILENO, "\n", 2);
+	write(STDOUT_FILENO, "\n", 2);
 	free(code);
 }
