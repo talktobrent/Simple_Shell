@@ -65,6 +65,7 @@ int builtins(struct wrap *all);
 int myenv(struct wrap *all);
 int myexit(struct wrap *all);
 void notbuiltin(struct wrap *all);
+int noslash(char *string);
 #endif /* _SHELL_H_ */
 
 
