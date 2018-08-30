@@ -10,14 +10,17 @@ void notbuiltin(struct wrap *all)
 	int size = 0;
 	char *col = ":";
 
-	if ((access(all->cmdarray[0], X_OK) == 0))
+	if (noslash(all->cmdarray[0]) == 1)
 	{
-		forkitfunction(all);
-	}
-	else if ((access(all->cmdarray[0], F_OK) == 0))
-	{
-		_error(all, "Permission denied");
-		all->retval = 126;
+		if ((access(all->cmdarray[0], X_OK) == 0))
+		{
+			forkitfunction(all);
+		}
+		if ((access(all->cmdarray[0], F_OK) == 0))
+		{
+			_error(all, "Permission denied");
+			all->retval = 126;
+		}
 	}
 	else
 	{

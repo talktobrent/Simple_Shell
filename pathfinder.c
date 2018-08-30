@@ -30,7 +30,7 @@ char *pathfinder(char **env)
 		count++;
 		count2 = 0;
 	}
-	if (env[count] != '\0')
+	if (env[count] != NULL)
 		string = _strdup(string);
 	else
 		string = NULL;
