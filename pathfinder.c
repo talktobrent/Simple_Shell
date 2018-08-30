@@ -4,39 +4,35 @@
 
 /**
  *pathfinder - finds the PATH variable in env
- *@all: all variables
+ *@env: enviroment
  *Return: pointer to PATH string just AFTER "PATH="
  */
 
-char *pathfinder(struct wrap *all)
+char *pathfinder(char **env)
 {
 	int count, count2;
-	char *string, **array, *compare, path[] = {'P', 'A', 'T', 'H', '='};
+	char *string = NULL, *path = "PATH=";
 
 	count = 0;
 	count2 = 0;
 
-	array = all->env;
-
-	while (array[count] != NULL)
+	while (env[count] != NULL)
 	{
-		compare = array[count];
-		while (*compare++ == path[count2])
+		while (env[count][count2] == path[count2])
 			count2++;
 
 		if (count2 == 5)
 		{
-			string = compare - 1;
+			string = &env[count][count2];
 			break;
 		}
 
 		count++;
 		count2 = 0;
 	}
-	if (array[count] != NULL)
+	if (env[count] != '\0')
 		string = _strdup(string);
 	else
 		string = NULL;
-
 	return (string);
 }

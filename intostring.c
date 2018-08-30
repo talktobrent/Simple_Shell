@@ -9,7 +9,7 @@ char *intostring(int x)
 {
 
 	int count, adjust;
-	char *string;
+	char *string = NULL;
 
 	/* creating space for max/min int character string */
 	string = malloc(sizeof(char) * 12);

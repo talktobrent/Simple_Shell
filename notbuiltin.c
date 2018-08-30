@@ -8,6 +8,7 @@
 void notbuiltin(struct wrap *all)
 {
 	int size = 0;
+	char *col = ":";
 
 	if ((access(all->cmdarray[0], X_OK) == 0))
 	{
@@ -20,11 +21,11 @@ void notbuiltin(struct wrap *all)
 	}
 	else
 	{
-		all->path = pathfinder(all);
+		all->path = pathfinder(all->env);
 		if (all->path != NULL)
 		{
 			size = stringprep(all->path, ':', '\0');
-			all->patharray = buildarray(all->path, ':', size);
+			all->patharray = buildarray(all->path, col, size);
 
 			if (all->patharray == NULL)
 			{
@@ -33,7 +34,12 @@ void notbuiltin(struct wrap *all)
 			}
 			all->retval = pathfork(all);
 			free(all->path);
-			free(all->patharray);
+			all->path = NULL;
+			if (all->patharray != NULL)
+			{
+				free(all->patharray);
+				all->patharray = NULL;
+			}
 		}
 		else
 		{
@@ -42,5 +48,6 @@ void notbuiltin(struct wrap *all)
 		}
 	}
 	free(all->cmdarray);
+	all->cmdarray = NULL;
 
 }

@@ -11,7 +11,8 @@
 
 int main(int ac, char **argv, char **env)
 {
-	int checkbuilt;
+	int checkbuilt = 0;
+	char *sp = " ";
 
 	struct wrap all;
 
@@ -21,6 +22,9 @@ int main(int ac, char **argv, char **env)
 		all.env = env;
 		all.off = 0;
 		all.size = 0;
+		all.line = NULL;
+		all.cmdarray = NULL;
+		all.patharray = NULL;
 
 		(void)(ac);
 	do {
@@ -30,7 +34,7 @@ int main(int ac, char **argv, char **env)
 
 		if (all.size > 0)
 		{
-			all.cmdarray = buildarray(all.line, ' ', all.size);
+			all.cmdarray = buildarray(all.line, sp, all.size);
 			if (all.cmdarray == NULL)
 			{
 				_error(&all, "Cannot allocate memory");
@@ -50,6 +54,7 @@ int main(int ac, char **argv, char **env)
 			}
 		}
 		free(all.line);
+		all.line = NULL;
 
 		all.size = 0;
 
