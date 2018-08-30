@@ -36,18 +36,15 @@ int pathfork(struct wrap *all)
 
 				if (execve(append, all->cmdarray, all->env) == -1)
 				{
-					_error(all, NULL);
-					_exit(1);
+					perror("Error ");
+					exit(91);
 				}
 			}
-			else
-			{
-				wait(&status);
-				if (WIFEXITED(status))
-					all->retval = WEXITSTATUS(status);
-				free(append);
-				return (all->retval);
-			}
+			wait(&status);
+			if (WIFEXITED(status))
+				all->retval = WEXITSTATUS(status);
+			free(append);
+			return (all->retval);
 		}
 		if (access(append, F_OK) == 0)
 		{
