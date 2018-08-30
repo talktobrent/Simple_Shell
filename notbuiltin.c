@@ -16,11 +16,17 @@ void notbuiltin(struct wrap *all)
 		{
 			forkitfunction(all);
 		}
-		if ((access(all->cmdarray[0], F_OK) == 0))
+		else if ((access(all->cmdarray[0], F_OK) == 0))
 		{
 			_error(all, "Permission denied");
 			all->retval = 126;
 		}
+		else
+		{
+			_error(all, "not found");
+			all->retval = 127;
+		}
+
 	}
 	else
 	{
